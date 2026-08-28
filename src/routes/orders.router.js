@@ -2,17 +2,11 @@ import { Router } from "express";
 import OrderModel from "../models/order.model.js";
 import UserModel from "../models/user.model.js";
 import StoreModel from "../models/store.model.js";
+import { getOrders } from "../ controllers/orders.controller.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const orders = await OrderModel.find().populate("customer").populate("store");
-    res.json({ status: "success", payload: orders });
-  } catch (error) {
-    res.status(500).json({ status: "error", message: error.message });
-  }
-});
+router.get("/", getOrders);
 
 router.get("/:oid", async (req, res) => {
   try {
