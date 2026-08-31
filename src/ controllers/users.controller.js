@@ -35,3 +35,12 @@ export const updateUser = async (req, res) => {
         res.status(error.statusCode || 500).json({ status: "error", message: error.message })
     }
 }
+
+export const deleteUser = async (req, res) => {
+    try {
+        const user = await userService.deleteUser(req.params.uid)
+        res.json({ status: "success", payload: user })
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ status: "error", message: error.message })
+    }
+}
